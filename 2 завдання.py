@@ -10,6 +10,11 @@ response = requests.get(url)
 # Створюємо об'єкт BeautifulSoup для аналізу HTML
 soup = BeautifulSoup(response.text, 'html.parser')
 
-quotes = soup.find_all('span', class_='text')
+# Знаходимо всі елементи, які можуть містити текст цитат
+quotes = soup.find_all(string=True)
+
+# Фільтруємо тільки ті елементи, які містять цитати
 for quote in quotes:
-    print(quote.text.strip())
+    # Перевірка, чи містить елемент текст цитати (якщо він не порожній)
+    if quote.strip():
+        print(quote.strip())
